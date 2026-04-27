@@ -34,12 +34,16 @@ The project demonstrates core concepts of Java programming, database connectivit
 src/
 ├── dao/
 │ └── StudentDAO.java
+
 ├── db/
 │ └── DBConnection.java
+
 ├── model/
 │ └── Student.java
+
 ├── gui/
 │ └── StudentGUI.java
+
 └── main/
 └── Main.java
 
