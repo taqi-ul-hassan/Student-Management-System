@@ -25,69 +25,62 @@ public class StudentDAO {
     }
 
     public void getAllStudents() {
-        try{
-        Connection conn = DBConnection.getConnection();
-        String query = "Select * from students";
-        PreparedStatement pst = conn.prepareStatement(query);
-        ResultSet rs = pst.executeQuery();
-        while (rs.next()) {
-            rs.getInt("id");
-            rs.getString("name");
-            rs.getInt("age");
-            System.out.println(rs.getInt("id") + "---" + rs.getString("name") + "---" + rs.getInt("age"));
-        }
-    }catch (Exception e) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "Select * from students";
+            PreparedStatement pst = conn.prepareStatement(query);
+            ResultSet rs = pst.executeQuery();
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String name = rs.getString("name");
+                int age = rs.getInt("age");
+                System.out.println(id + "---" + name + "---" + age);
+            }
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
     }
-    public void updateStudent(student s){
-    try{
-        Connection conn = DBConnection.getConnection();
-        String query = "UPDATE students SET name = ?, age = ? WHERE id = ?";
-        PreparedStatement pst = conn.prepareStatement(query);
-        pst.setString(1, s.getName());
-        pst.setInt(2, s.getAge());
-        pst.setInt(3, s.getId());
-        pst.executeUpdate();
-        System.out.println("Student updated successfully");
-    } catch(Exception e){
-        e.printStackTrace();
+
+    public void updateStudent(student s) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "UPDATE students SET name = ?, age = ? WHERE id = ?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setString(1, s.getName());
+            pst.setInt(2, s.getAge());
+            pst.setInt(3, s.getId());
+            pst.executeUpdate();
+            System.out.println("Student updated successfully");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
+
+    public void deleteStudent(int id) {
+        try {
+            Connection conn = DBConnection.getConnection();
+            String query = "DELETE FROM students WHERE id = ?";
+            PreparedStatement pst = conn.prepareStatement(query);
+            pst.setInt(1, id);
+            pst.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    public void deleteStudent(int id){
-        try{
-        Connection conn = DBConnection.getConnection();
-        String query  = "DELETE FROM students WHERE id = ?";
-        PreparedStatement pst = conn.prepareStatement(query);
-        pst.setInt(1, id);
-        pst.executeUpdate();
-    }catch(Exception e){
-        e.printStackTrace();
-    }
-}
-    public boolean studentExists(int id){
-        try{
+
+    public boolean studentExists(int id) {
+        try {
             Connection conn = DBConnection.getConnection();
             String query = "SELECT * FROM students WHERE id = ?";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, id);
             ResultSet rs = pst.executeQuery();
             return rs.next();
-        }catch(Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
     }
-    public ResultSet getStudentsResultSet(){
-    try{
-        Connection conn = DBConnection.getConnection();
-        String query = "SELECT * FROM students";
-        PreparedStatement pst = conn.prepareStatement(query);
-        return pst.executeQuery();
-    } catch(Exception e){
-        e.printStackTrace();
-        return null;
-    }
-}
+
 }

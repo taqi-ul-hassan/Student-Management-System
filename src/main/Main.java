@@ -1,107 +1,154 @@
 package main;
-import model.student;
 
 import java.util.Scanner;
 
 import dao.StudentDAO;
+import dao.TeacherDAO;
+import dao.CourseDAO;
+import dao.EnrollmentDAO;
+import model.student;
+import model.Teacher;
+import model.Course;
+import model.Enrollment;
+
 public class Main {
+
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
-        int choice;
+
         StudentDAO sDao = new StudentDAO();
+        TeacherDAO tDao = new TeacherDAO();
+        CourseDAO cDao = new CourseDAO();
+        EnrollmentDAO eDao = new EnrollmentDAO();
+
+        int choice;
+
         do {
-            System.out.println("\nChoose your required option:");
-            System.out.println("1: ADD student");
-            System.out.println("2: VIEW student");
-            System.out.println("3: UPDATE student");
-            System.out.println("4: DELETE student");
-            System.out.println("5: EXIT");
+            System.out.println("\n===== MAIN MENU =====");
+            System.out.println("1. Manage Students");
+            System.out.println("2. Manage Teachers");
+            System.out.println("3. Manage Courses");
+            System.out.println("4. Manage Enrollment");
+            System.out.println("5. Exit");
+
             choice = sc.nextInt();
+
             switch (choice) {
+
+                // ================= STUDENTS =================
                 case 1:
-                    System.out.println("Adding student...");
-                    System.out.println("Please type your id: ");
-                    int id = sc.nextInt();
-                    while (id <= 0 || sDao.studentExists(id)) {
-                        if (id <= 0) {
-                            System.out.println("Invalid ID! Enter again: ");
-                        } else {
-                            System.out.println("ID already exists! Enter a different ID: ");
-                        }
-                        id = sc.nextInt();
+                    System.out.println("\n--- STUDENT MENU ---");
+                    System.out.println("1. Add Student");
+                    System.out.println("2. View Students");
+                    int sChoice = sc.nextInt();
+
+                    if (sChoice == 1) {
+                        System.out.print("Enter ID: ");
+                        int id = sc.nextInt();
+                        sc.nextLine();
+
+                        System.out.print("Enter Name: ");
+                        String name = sc.nextLine();
+
+                        System.out.print("Enter Age: ");
+                        int age = sc.nextInt();
+
+                        student s = new student();
+                        s.setId(id);
+                        s.setName(name);
+                        s.setAge(age);
+
+                        sDao.addStudent(s);
+
+                    } else if (sChoice == 2) {
+                        sDao.getAllStudents();
                     }
-                    sc.nextLine();
-                    System.out.println("Please type your name: ");
-                    String name = sc.nextLine();
-                    while (name.trim().isEmpty()) {
-                        System.out.println("Name cannot be empty. Please enter again: ");
-                        name = sc.nextLine();
-                    }
-                    System.out.println("Please type your age: ");
-                    int age = sc.nextInt();
-                    while (age <= 0 || age > 120) {
-                    System.out.println("Enter valid age (1-120): ");
-                    age = sc.nextInt();
-                    }
-                    student s1 = new student();
-                    s1.setId(id);
-                    s1.setName(name);
-                    s1.setAge(age);
-                    sDao.addStudent(s1);
                     break;
 
+                // ================= TEACHERS =================
                 case 2:
-                    System.out.println("Viewing student...");
-                    sDao.getAllStudents();
+                    System.out.println("\n--- TEACHER MENU ---");
+                    System.out.println("1. Add Teacher");
+                    System.out.println("2. View Teachers");
+                    int tChoice = sc.nextInt();
+
+                    if (tChoice == 1) {
+                        System.out.print("Enter ID: ");
+                        int id = sc.nextInt();
+                        sc.nextLine();
+
+                        System.out.print("Enter Name: ");
+                        String name = sc.nextLine();
+
+                        System.out.print("Enter Subject: ");
+                        String subject = sc.nextLine();
+
+                        Teacher t = new Teacher();
+                        t.setId(id);
+                        t.setName(name);
+                        t.setSubject(subject);
+
+                        tDao.addTeacher(t);
+
+                    } else if (tChoice == 2) {
+                        tDao.getAllTeachers();
+                    }
                     break;
 
+                // ================= COURSES =================
                 case 3:
-                System.out.println("Updating student...");
-                System.out.print("Enter ID to update: ");
-                int uid = sc.nextInt();
+                    System.out.println("\n--- COURSE MENU ---");
+                    System.out.println("1. Add Course");
+                    System.out.println("2. View Courses");
+                    int cChoice = sc.nextInt();
 
-                while (!sDao.studentExists(uid)) {
-                    System.out.println("Student doesn't exist!");
-                    System.out.println("Please type a valid id: ");
-                    uid = sc.nextInt();
-                }
+                    if (cChoice == 1) {
+                        System.out.print("Enter Course ID: ");
+                        int id = sc.nextInt();
+                        sc.nextLine();
 
-                sc.nextLine();
+                        System.out.print("Enter Course Name: ");
+                        String name = sc.nextLine();
 
-                System.out.print("Enter new name: ");
-                String uname = sc.nextLine();
-                while (uname.trim().isEmpty()) {
-                    System.out.println("Name cannot be empty. Enter again:");
-                    uname = sc.nextLine();
-                }
+                        System.out.print("Enter Teacher ID: ");
+                        int teacherId = sc.nextInt();
 
-                System.out.print("Enter new age: ");
-                int uage = sc.nextInt();
-                while (uage <= 0 || uage > 120) {
-                    System.out.println("Enter valid age (1-120): ");
-                    uage = sc.nextInt();
-                }
+                        Course c = new Course();
+                        c.setId(id);
+                        c.setName(name);
+                        c.setTeacherId(teacherId);
 
-                student us = new student();
-                us.setId(uid);
-                us.setName(uname);
-                us.setAge(uage);
+                        cDao.addCourse(c);
 
-                sDao.updateStudent(us);
-
-                System.out.println("Student updated successfully!\n");
-                break;
-                case 4:
-                    System.out.println("Deleting student...");
-                    System.out.print("Enter ID: ");
-                    int user_id = sc.nextInt();
-                    while (!sDao.studentExists(user_id)) {
-                        System.out.println("Student not found!");
-                        System.out.println("Please type a valid id: ");
-                        user_id = sc.nextInt();
+                    } else if (cChoice == 2) {
+                        cDao.getAllCourses();
                     }
-                    sDao.deleteStudent(user_id); 
-                    System.out.println("Student deleted successfully!\n");
+                    break;
+
+                // ================= ENROLLMENT =================
+                case 4:
+                    System.out.println("\n--- ENROLLMENT MENU ---");
+                    System.out.println("1. Enroll Student");
+                    System.out.println("2. View Enrollments");
+                    int eChoice = sc.nextInt();
+
+                    if (eChoice == 1) {
+                        System.out.print("Enter Student ID: ");
+                        int studentId = sc.nextInt();
+
+                        System.out.print("Enter Course ID: ");
+                        int courseId = sc.nextInt();
+
+                        Enrollment e = new Enrollment();
+                        e.setStudentId(studentId);
+                        e.setCourseId(courseId);
+
+                        eDao.enrollStudent(e);
+
+                    } else if (eChoice == 2) {
+                        eDao.getAllEnrollments();
+                    }
                     break;
 
                 case 5:
@@ -111,8 +158,9 @@ public class Main {
                 default:
                     System.out.println("Invalid choice!");
             }
+
         } while (choice != 5);
+
         sc.close();
     }
-
 }
