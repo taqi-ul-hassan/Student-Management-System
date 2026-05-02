@@ -32,4 +32,4 @@ Schema is provided in `sql/schema.sql`
 3. Run Main.java
 
 ## Author
-Your Name
+Taqi Ul Hassan
