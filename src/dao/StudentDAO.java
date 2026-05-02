@@ -11,7 +11,7 @@ public class StudentDAO {
     public void addStudent(student s) {
         try {
             Connection conn = DBConnection.getConnection();
-            String query = "insert into students VALUES (?,?,?)";
+            String query = "insert into students VALUES  (?,?,?)";
             PreparedStatement pst = conn.prepareStatement(query);
             pst.setInt(1, s.getId());
             pst.setString(2, s.getName());
@@ -51,7 +51,7 @@ public class StudentDAO {
             pst.setInt(2, s.getAge());
             pst.setInt(3, s.getId());
             pst.executeUpdate();
-            System.out.println("Student updated successfully");
+            System.out.println("The student has been updated");
         } catch (Exception e) {
             e.printStackTrace();
         }

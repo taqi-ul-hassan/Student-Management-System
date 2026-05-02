@@ -15,6 +15,7 @@ public class DBConnection {
             conn = DriverManager.getConnection(URL, USER, PASSWORD);
             System.out.println("Connected successfully to database!");
         } catch (Exception e) {
+            System.out.println("problem starts from here");
             System.out.println("Connection failed!");
             e.printStackTrace();
         }
