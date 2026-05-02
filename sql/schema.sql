@@ -1,0 +1,2 @@
+-- Student Management System Database Schema
+-- Contains students, teachers, courses, and enrollments tables
