@@ -1,81 +1,35 @@
-# Student Management System (Java + MySQL + GUI)
+# Student Management System (Java + MySQL)
 
 ## Overview
-This project is a Student Management System developed using Java, MySQL, and Swing GUI. It provides a simple and interactive interface to manage student records with full CRUD (Create, Read, Update, Delete) functionality.
-
-The project demonstrates core concepts of Java programming, database connectivity using JDBC, and GUI development.
-
----
+A terminal-based Student Management System built using Java and MySQL. 
+It supports managing students, teachers, courses, and enrollments with full CRUD operations and relational integrity.
 
 ## Features
+- Add, update, delete, and view students
+- Manage teachers and assigned subjects
+- Create courses linked to teachers
+- Enroll students in courses (many-to-many relationship)
+- Input validation and existence checks
 
-- Add new student records
-- View all students in a table format
-- Update existing student details
-- Delete students by ID
-- Input validation (ID, name, age)
-- Duplicate ID prevention
-- "Student not found" handling
-- GUI-based interaction using Java Swing
-
----
-
-## Technologies Used
-
-- Java (Core Java, Swing)
-- MySQL Database
-- JDBC (Java Database Connectivity)
-
----
+## Technologies
+- Java (JDBC)
+- MySQL
+- VS Code
 
 ## Project Structure
-
-
 src/
-├── dao/
-│ └── StudentDAO.java
+ ├── dao/
+ ├── db/
+ ├── model/
+ └── main/
 
-├── db/
-│ └── DBConnection.java
+## Database
+Schema is provided in `sql/schema.sql`
 
-├── model/
-│ └── Student.java
+## How to Run
+1. Import database from schema.sql
+2. Add MySQL connector JAR
+3. Run Main.java
 
-├── gui/
-│ └── StudentGUI.java
-
-└── main/
-└── Main.java
-
----
-## Database Setup
-
-Run the following SQL commands in MySQL:
-
-```sql
-CREATE DATABASE sms;
-USE sms;
-
-CREATE TABLE students (
-    id INT PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    age INT NOT NULL
-);
-How to Run
-Clone the repository:
-git clone https://github.com/YOUR_USERNAME/student-management-system.git
-Navigate to the project directory:
-cd student-management-system/src
-Compile the project:
-javac -cp ".;../lib/mysql-connector-j-9.7.0.jar" gui/StudentGUI.java dao/StudentDAO.java db/DBConnection.java model/Student.java
-Run the application:
-java -cp ".;../lib/mysql-connector-j-9.7.0.jar" gui.StudentGUI
-Future Improvements
-Display messages directly in GUI instead of console
-Add search functionality by student ID
-Improve GUI layout and styling
-Add sorting and filtering options
-Implement service layer for better architecture
-Convert to web application using Spring Boot
-Author:
-Hafiz Taqi Ul Hassan
+## Author
+Taqi Ul Hassan

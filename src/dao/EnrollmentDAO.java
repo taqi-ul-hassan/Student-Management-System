@@ -3,19 +3,16 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
 import db.DBConnection;
 import model.Enrollment;
 
 public class EnrollmentDAO {
 
-    // ENROLL STUDENT
     public void enrollStudent(Enrollment e) {
         try {
             StudentDAO sDao = new StudentDAO();
             CourseDAO cDao = new CourseDAO();
 
-            // VALIDATION
             if (!sDao.studentExists(e.getStudentId())) {
                 System.out.println("Student does not exist!");
                 return;
@@ -45,8 +42,6 @@ public class EnrollmentDAO {
             ex.printStackTrace();
         }
     }
-
-    // CHECK IF ENROLLMENT EXISTS
     public boolean enrollmentExists(int studentId, int courseId) {
         try {
             Connection conn = DBConnection.getConnection();
@@ -64,8 +59,6 @@ public class EnrollmentDAO {
             return false;
         }
     }
-
-    // VIEW ALL ENROLLMENTS
     public void getAllEnrollments() {
         try {
             Connection conn = DBConnection.getConnection();
@@ -84,8 +77,6 @@ public class EnrollmentDAO {
             e.printStackTrace();
         }
     }
-
-    // DELETE ENROLLMENT
     public void deleteEnrollment(int studentId, int courseId) {
         try {
             Connection conn = DBConnection.getConnection();
