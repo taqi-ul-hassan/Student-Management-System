@@ -8,7 +8,7 @@ It supports managing students, teachers, courses, and enrollments with full CRUD
 - Add, update, delete, and view students
 - Manage teachers and assigned subjects
 - Create courses linked to teachers
-- Enroll students in courses (many-to-many relationship)
+- Enroll students in courses (There exists a many-to-many relationship)
 - Input validation and existence checks
 
 ## Technologies
@@ -19,8 +19,11 @@ It supports managing students, teachers, courses, and enrollments with full CRUD
 ## Project Structure
 src/
  ├── dao/
+ 
  ├── db/
+ 
  ├── model/
+ 
  └── main/
 
 ## Database
